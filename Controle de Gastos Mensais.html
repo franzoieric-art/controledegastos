@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://www.lncc.br/~borges/php/testar.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Gastos Mensais</title>
+    <script src="./Controle de Gastos Mensais_files/saved_resource"></script>
+    <script src="./Controle de Gastos Mensais_files/chart.js"></script>
+    <link href="./Controle de Gastos Mensais_files/css2" rel="stylesheet">
+    <style>
+        /* Define a fonte padrão para o corpo do documento */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Cor de fundo cinza claro */
+        }
+        /* Define a largura máxima do container principal */
+        .container {
+            max-width: 1200px;
+        }
+        /* Remove as setas de incremento/decremento de campos de número */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        /* Estilos para os botões de remover */
+        .remove-btn {
+            background-color: #ef4444; /* Vermelho */
+            color: white;
+            border-radius: 0.375rem; /* rounded-md */
+            padding: 0.25rem 0.5rem; /* py-1 px-2 */
+            font-size: 0.75rem; /* text-xs */
+            line-height: 1;
+            transition: background-color 0.2s;
+            flex-shrink: 0; /* Garante que o botão não encolha */
+        }
+        .remove-btn:hover {
+            background-color: #dc2626; /* Vermelho mais escuro ao passar o mouse */
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.relative{position:relative}.mx-auto{margin-left:auto;margin-right:auto}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mt-2{margin-top:0.5rem}.mt-4{margin-top:1rem}.block{display:block}.flex{display:flex}.grid{display:grid}.w-full{width:100%}.min-w-full{min-width:100%}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-between{justify-content:space-between}.gap-6{gap:1.5rem}.gap-2{gap:0.5rem}.overflow-x-auto{overflow-x:auto}.whitespace-nowrap{white-space:nowrap}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.rounded-tl-lg{border-top-left-radius:0.5rem}.rounded-tr-lg{border-top-right-radius:0.5rem}.border{border-width:1px}.border-t{border-top-width:1px}.border-b{border-bottom-width:1px}.border-blue-300{--tw-border-opacity:1;border-color:rgb(147 197 253 / var(--tw-border-opacity, 1))}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235 / var(--tw-border-opacity, 1))}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.bg-purple-50{--tw-bg-opacity:1;background-color:rgb(250 245 255 / var(--tw-bg-opacity, 1))}.bg-red-500{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-blue-500{--tw-bg-opacity:1;background-color:rgb(59 130 246 / var(--tw-bg-opacity, 1))}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity, 1))}.bg-green-500{--tw-bg-opacity:1;background-color:rgb(34 197 94 / var(--tw-bg-opacity, 1))}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.pt-2{padding-top:0.5rem}.text-left{text-align:left}.text-center{text-align:center}.align-top{vertical-align:top}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-light{font-weight:300}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-normal{line-height:1.5}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-green-600{--tw-text-opacity:1;color:rgb(22 163 74 / var(--tw-text-opacity, 1))}.text-red-600{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity, 1))}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:bg-red-600:hover{--tw-bg-opacity:1;background-color:rgb(220 38 38 / var(--tw-bg-opacity, 1))}.hover\:bg-blue-600:hover{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.hover\:bg-green-600:hover{--tw-bg-opacity:1;background-color:rgb(22 163 74 / var(--tw-bg-opacity, 1))}.focus\:border-blue-500:focus{--tw-border-opacity:1;border-color:rgb(59 130 246 / var(--tw-border-opacity, 1))}.focus\:ring-blue-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(59 130 246 / var(--tw-ring-opacity, 1))}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}}</style></head>
+<body class="p-4">
+    <div class="container mx-auto bg-white p-6 rounded-lg shadow-xl">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Controle de Gastos Mensais</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-blue-50 p-4 rounded-lg shadow-md">
+                <label for="monthlyBudget" class="block text-sm font-medium text-gray-700 mb-2">Orçamento Mensal (R$):</label>
+                <input type="number" id="monthlyBudget" value="0" min="0" class="w-full p-3 border border-blue-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-lg font-semibold text-blue-700 bg-white shadow-sm">
+            </div>
+            <div class="bg-purple-50 p-4 rounded-lg shadow-md flex flex-col justify-between">
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-3">Resumo dos Gastos</h2>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">Total Pessoal:</span>
+                        <span id="totalPersonal" class="text-lg font-bold text-red-600">R$ 0,00</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">Total Empresa:</span>
+                        <span id="totalBusiness" class="text-lg font-bold text-green-600">R$ 0,00</span>
+                    </div>
+                    <div class="flex justify-between items-center border-t pt-2 mt-2 border-gray-200">
+                        <span class="text-gray-700 font-medium">Total Geral:</span>
+                        <span id="totalOverall" class="text-xl font-bold text-gray-800">R$ 0,00</span>
+                    </div>
+                    <div class="flex justify-between items-center border-t pt-2 mt-2 border-gray-200">
+                        <span class="text-gray-700 font-medium">Saldo Restante:</span>
+                        <span id="remainingBudget" class="text-xl font-bold text-blue-700">R$ 0,00</span>
+                    </div>
+                </div>
+                <button id="clearDataBtn" class="w-full mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors text-sm font-semibold">
+                    Limpar Dados e Recomeçar
+                </button>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto mb-8">
+            <table class="min-w-full bg-white rounded-lg shadow-md">
+                <thead>
+                    <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                        <th class="py-3 px-6 text-left rounded-tl-lg">Dia</th>
+                        <th class="py-3 px-6 text-left">Gastos Pessoais</th>
+                        <th class="py-3 px-6 text-left rounded-tr-lg">Gastos da Empresa</th>
+                    </tr>
+                </thead>
+                <tbody id="expenseTableBody" class="text-gray-700 text-sm font-light"><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">1</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="0" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="0" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">2</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="1" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="1" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">3</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="2" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="2" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">4</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="3" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="3" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">5</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="4" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="4" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">6</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="5" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="5" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">7</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="6" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="6" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">8</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="7" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="7" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">9</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="8" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="8" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">10</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="9" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="9" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">11</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="10" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="10" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">12</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="11" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="11" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">13</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="12" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="12" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">14</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="13" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="13" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">15</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="14" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="14" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">16</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="15" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="15" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">17</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="16" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="16" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">18</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="17" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="17" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">19</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="18" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="18" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">20</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="19" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="19" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">21</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="20" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="20" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">22</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="21" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="21" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">23</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="22" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="22" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">24</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="23" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="23" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">25</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="24" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="24" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">26</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="25" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="25" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">27</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="26" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="26" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">28</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="27" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="27" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">29</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="28" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="28" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200 bg-gray-50"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">30</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="29" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="29" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr><tr class="border-b border-gray-200"><td class="py-3 px-6 text-left whitespace-nowrap font-medium text-gray-900 align-top">31</td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-blue-500 hover:bg-blue-600" data-day="30" data-category="personal">+ Adicionar Gasto Pessoal</button></td><td class="py-3 px-6 text-left align-top"><div class="flex flex-col gap-2"></div><button class="add-expense-btn mt-2 px-3 py-1 text-white rounded-md text-xs transition-colors bg-green-500 hover:bg-green-600" data-day="30" data-category="business">+ Adicionar Gasto da Empresa</button></td></tr></tbody>
+            </table>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-xl">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 text-center">Distribuição do Orçamento</h2>
+            <div class="relative mx-auto" style="max-width: 400px; height: 400px;">
+                <canvas id="budgetPieChart" width="800" height="800" style="display: block; box-sizing: border-box; height: 400px; width: 400px;"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Obtém referências aos elementos do DOM
+        const monthlyBudgetInput = document.getElementById('monthlyBudget');
+        const totalPersonalSpan = document.getElementById('totalPersonal');
+        const totalBusinessSpan = document.getElementById('totalBusiness');
+        const totalOverallSpan = document.getElementById('totalOverall');
+        const remainingBudgetSpan = document.getElementById('remainingBudget');
+        const expenseTableBody = document.getElementById('expenseTableBody');
+        const budgetPieChartCtx = document.getElementById('budgetPieChart').getContext('2d');
+        const clearDataBtn = document.getElementById('clearDataBtn');
+
+        // Chaves para o LocalStorage
+        const BUDGET_STORAGE_KEY = 'monthlyTrackerBudget';
+        const EXPENSES_STORAGE_KEY = 'monthlyTrackerExpenses';
+
+        // Variável para armazenar a instância do gráfico
+        let budgetPieChart;
+
+        // Inicializa o array de despesas. Usamos 'let' para permitir a reatribuição ao carregar dados.
+        let expenses = Array(31).fill(null).map(() => ({
+            personalEntries: [],
+            businessEntries: []
+        }));
+
+        // Função para salvar dados no LocalStorage
+        const saveData = () => {
+            localStorage.setItem(BUDGET_STORAGE_KEY, monthlyBudgetInput.value);
+            localStorage.setItem(EXPENSES_STORAGE_KEY, JSON.stringify(expenses));
+        };
+
+        // Função para carregar dados do LocalStorage
+        const loadData = () => {
+            const savedBudget = localStorage.getItem(BUDGET_STORAGE_KEY);
+            const savedExpenses = localStorage.getItem(EXPENSES_STORAGE_KEY);
+
+            if (savedBudget) {
+                monthlyBudgetInput.value = savedBudget;
+            }
+            if (savedExpenses) {
+                expenses = JSON.parse(savedExpenses);
+            }
+        };
+
+        // Função para limpar os dados salvos
+        const clearData = () => {
+            if (confirm('Tem certeza de que deseja apagar todos os dados? Esta ação não pode ser desfeita.')) {
+                localStorage.removeItem(BUDGET_STORAGE_KEY);
+                localStorage.removeItem(EXPENSES_STORAGE_KEY);
+                location.reload(); // Recarrega a página para redefinir para o estado inicial
+            }
+        };
+
+        const formatCurrency = (value) => {
+            return `R$ ${value.toFixed(2).replace('.', ',')}`;
+        };
+
+        const renderTable = () => {
+            expenseTableBody.innerHTML = '';
+            expenses.forEach((dayExpense, index) => {
+                const row = document.createElement('tr');
+                row.classList.add('border-b', 'border-gray-200');
+                if ((index + 1) % 2 === 0) row.classList.add('bg-gray-50');
+
+                const dayCell = document.createElement('td');
+                dayCell.classList.add('py-3', 'px-6', 'text-left', 'whitespace-nowrap', 'font-medium', 'text-gray-900', 'align-top');
+                dayCell.textContent = index + 1;
+                row.appendChild(dayCell);
+
+                const personalCell = createCategoryCell(index, 'personal', dayExpense.personalEntries);
+                row.appendChild(personalCell);
+
+                const businessCell = createCategoryCell(index, 'business', dayExpense.businessEntries);
+                row.appendChild(businessCell);
+
+                expenseTableBody.appendChild(row);
+            });
+        };
+        
+        // Função auxiliar para criar células de categoria (Pessoal/Empresa)
+        const createCategoryCell = (dayIndex, category, entries) => {
+            const cell = document.createElement('td');
+            cell.classList.add('py-3', 'px-6', 'text-left', 'align-top');
+
+            const entriesContainer = document.createElement('div');
+            entriesContainer.classList.add('flex', 'flex-col', 'gap-2');
+            entries.forEach(entry => {
+                entriesContainer.appendChild(createExpenseEntryElement(dayIndex, category, entry));
+            });
+
+            const addButton = document.createElement('button');
+            const isPersonal = category === 'personal';
+            addButton.textContent = `+ Adicionar Gasto ${isPersonal ? 'Pessoal' : 'da Empresa'}`;
+            addButton.classList.add('add-expense-btn', 'mt-2', 'px-3', 'py-1', 'text-white', 'rounded-md', 'text-xs', 'transition-colors');
+            addButton.classList.add(isPersonal ? 'bg-blue-500' : 'bg-green-500', isPersonal ? 'hover:bg-blue-600' : 'hover:bg-green-600');
+            addButton.dataset.day = dayIndex;
+            addButton.dataset.category = category;
+            addButton.addEventListener('click', handleAddExpense);
+            
+            cell.appendChild(entriesContainer);
+            cell.appendChild(addButton);
+            return cell;
+        };
+
+        const createExpenseEntryElement = (dayIndex, category, entry) => {
+            const entryDiv = document.createElement('div');
+            entryDiv.classList.add('flex', 'items-center', 'gap-1', 'w-full');
+
+            const descriptionInput = document.createElement('input');
+            descriptionInput.type = 'text';
+            descriptionInput.value = entry.description;
+            descriptionInput.placeholder = 'Descrição';
+            descriptionInput.classList.add('flex-grow', 'p-2', 'border', 'border-gray-300', 'rounded-md', 'focus:ring-blue-500', 'focus:border-blue-500', 'text-sm', 'bg-white');
+            descriptionInput.dataset.day = dayIndex;
+            descriptionInput.dataset.category = category;
+            descriptionInput.dataset.entryId = entry.id;
+            descriptionInput.dataset.type = 'description';
+            descriptionInput.addEventListener('input', handleExpenseInput);
+
+            const amountInput = document.createElement('input');
+            amountInput.type = 'number';
+            amountInput.value = entry.amount;
+            amountInput.min = '0';
+            amountInput.step = '0.01';
+            amountInput.placeholder = '0.00';
+            amountInput.classList.add('w-24', 'p-2', 'border', 'rounded-md', 'text-sm', 'bg-white');
+            const isPersonal = category === 'personal';
+            amountInput.classList.add(isPersonal ? 'border-red-300' : 'border-green-300', isPersonal ? 'text-red-700' : 'text-green-700');
+            amountInput.classList.add(isPersonal ? 'focus:ring-red-500' : 'focus:ring-green-500', isPersonal ? 'focus:border-red-500' : 'focus:border-green-500');
+            amountInput.dataset.day = dayIndex;
+            amountInput.dataset.category = category;
+            amountInput.dataset.entryId = entry.id;
+            amountInput.dataset.type = 'amount';
+            amountInput.addEventListener('input', handleExpenseInput);
+
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'X';
+            removeBtn.classList.add('remove-btn');
+            removeBtn.dataset.day = dayIndex;
+            removeBtn.dataset.category = category;
+            removeBtn.dataset.entryId = entry.id;
+            removeBtn.addEventListener('click', handleRemoveExpense);
+
+            entryDiv.appendChild(descriptionInput);
+            entryDiv.appendChild(amountInput);
+            entryDiv.appendChild(removeBtn);
+
+            return entryDiv;
+        };
+
+        const handleAddExpense = (event) => {
+            const dayIndex = parseInt(event.target.dataset.day);
+            const category = event.target.dataset.category;
+            const newEntry = { id: Date.now() + Math.random(), description: '', amount: 0 };
+            const entries = category === 'personal' ? expenses[dayIndex].personalEntries : expenses[dayIndex].businessEntries;
+            entries.push(newEntry);
+            renderTable();
+            updateTotals();
+        };
+
+        const handleRemoveExpense = (event) => {
+            const dayIndex = parseInt(event.target.dataset.day);
+            const category = event.target.dataset.category;
+            const entryId = parseFloat(event.target.dataset.entryId);
+            if (category === 'personal') {
+                expenses[dayIndex].personalEntries = expenses[dayIndex].personalEntries.filter(entry => entry.id !== entryId);
+            } else {
+                expenses[dayIndex].businessEntries = expenses[dayIndex].businessEntries.filter(entry => entry.id !== entryId);
+            }
+            renderTable();
+            updateTotals();
+        };
+
+        const handleExpenseInput = (event) => {
+            const { day, category, entryId, type } = event.target.dataset;
+            const entryToUpdate = (category === 'personal' ? expenses[parseInt(day)].personalEntries : expenses[parseInt(day)].businessEntries).find(e => e.id === parseFloat(entryId));
+            if (entryToUpdate) {
+                if (type === 'description') entryToUpdate.description = event.target.value;
+                else if (type === 'amount') entryToUpdate.amount = parseFloat(event.target.value) || 0;
+            }
+            updateTotals();
+        };
+        
+        const updateTotals = () => {
+            let totalPersonal = 0;
+            let totalBusiness = 0;
+
+            expenses.forEach(dayExpense => {
+                dayExpense.personalEntries.forEach(entry => totalPersonal += entry.amount);
+                dayExpense.businessEntries.forEach(entry => totalBusiness += entry.amount);
+            });
+
+            const totalOverall = totalPersonal + totalBusiness;
+            const monthlyBudget = parseFloat(monthlyBudgetInput.value) || 0;
+            const remainingBudget = monthlyBudget - totalOverall;
+
+            totalPersonalSpan.textContent = formatCurrency(totalPersonal);
+            totalBusinessSpan.textContent = formatCurrency(totalBusiness);
+            totalOverallSpan.textContent = formatCurrency(totalOverall);
+            remainingBudgetSpan.textContent = formatCurrency(remainingBudget);
+
+            remainingBudgetSpan.classList.toggle('text-red-700', remainingBudget < 0);
+            remainingBudgetSpan.classList.toggle('text-blue-700', remainingBudget >= 0);
+
+            updatePieChart(totalPersonal, totalBusiness, remainingBudget);
+            saveData(); // Salva os dados a cada atualização
+        };
+
+        const updatePieChart = (personal, business, remaining) => {
+            const chartRemaining = Math.max(0, remaining);
+            const data = {
+                labels: ['Gastos Pessoais', 'Gastos da Empresa', 'Orçamento Restante'],
+                datasets: [{
+                    data: [personal, business, chartRemaining],
+                    backgroundColor: ['rgba(239, 68, 68, 0.8)', 'rgba(16, 185, 129, 0.8)', 'rgba(59, 130, 246, 0.8)'],
+                    borderColor: ['#EF4444', '#10B981', '#3B82F6'],
+                    borderWidth: 1
+                }]
+            };
+
+            if (budgetPieChart) {
+                budgetPieChart.data = data;
+                budgetPieChart.update();
+            } else {
+                budgetPieChart = new Chart(budgetPieChartCtx, {
+                    type: 'pie',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'top', labels: { font: { size: 14, family: 'Inter' } } },
+                            tooltip: {
+                                callbacks: { label: (context) => `${context.label || ''}: ${formatCurrency(context.parsed || 0)}` },
+                                bodyFont: { family: 'Inter' }
+                            }
+                        }
+                    }
+                });
+            }
+        };
+
+        // --- Inicialização da Aplicação ---
+        
+        // Adiciona os listeners de eventos
+        monthlyBudgetInput.addEventListener('input', updateTotals);
+        clearDataBtn.addEventListener('click', clearData);
+        
+        // Carrega os dados, renderiza a tabela e atualiza os totais ao iniciar
+        loadData();
+        renderTable();
+        updateTotals();
+
+    </script>
+
+
+</body></html>
